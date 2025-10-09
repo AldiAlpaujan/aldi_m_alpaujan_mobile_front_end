@@ -53,7 +53,7 @@ class ProductEditAction extends StatelessWidget {
           ).onTap(ctrl.selectAllToggle).expand,
 
           ElevatedButton(
-            onPressed: ctrl.deleteProducts,
+            onPressed: ctrl.bulkDelete,
             style: ButtonStyle(
               backgroundColor: WidgetStateProperty.all(Colors.transparent),
               foregroundColor: WidgetStateProperty.all(Colors.red),

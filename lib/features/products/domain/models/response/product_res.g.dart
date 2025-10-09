@@ -22,6 +22,8 @@ Map<String, dynamic> _$ProductResToJson(ProductRes instance) =>
 
 Product _$ProductFromJson(Map<String, dynamic> json) => Product(
   id: (json['id'] as num).toInt(),
+  categoryId: (json['category_id'] as num).toInt(),
+  categoryName: json['category_name'] as String,
   productName: json['product_name'] as String,
   stock: (json['stock'] as num).toInt(),
   group: json['group'] as String,
@@ -30,6 +32,8 @@ Product _$ProductFromJson(Map<String, dynamic> json) => Product(
 
 Map<String, dynamic> _$ProductToJson(Product instance) => <String, dynamic>{
   'id': instance.id,
+  'category_id': instance.categoryId,
+  'category_name': instance.categoryName,
   'product_name': instance.productName,
   'stock': instance.stock,
   'group': instance.group,

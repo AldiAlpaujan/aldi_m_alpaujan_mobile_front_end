@@ -89,6 +89,7 @@ class AppTheme {
     style: ElevatedButton.styleFrom(
       backgroundColor: primaryColor,
       textStyle: const TextStyle(color: Color(0xFFFFFFFF)),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
     ),
   );
   static const btnStyle = TextStyle(

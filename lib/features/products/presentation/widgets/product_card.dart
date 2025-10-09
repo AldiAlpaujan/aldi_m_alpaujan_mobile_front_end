@@ -55,7 +55,7 @@ class ProductCard extends StatelessWidget with FormatterMixin {
             Text(moneyFormatter(item.price)),
           ],
         ),
-      ).onTap(() => ctrl.onCardTap(item.id)),
+      ).onTap(() => ctrl.onCardTap(item)),
     );
   }
 }

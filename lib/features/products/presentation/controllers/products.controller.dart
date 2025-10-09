@@ -2,8 +2,8 @@ import 'package:aldi_m_alpaujan_mobile_front_end/config/bases/base_api_paginatio
 import 'package:aldi_m_alpaujan_mobile_front_end/features/products/domain/models/request/product_req.dart';
 import 'package:aldi_m_alpaujan_mobile_front_end/features/products/domain/models/response/product_res.dart';
 import 'package:aldi_m_alpaujan_mobile_front_end/features/products/domain/usecases/get_products_uc.dart';
+import 'package:aldi_m_alpaujan_mobile_front_end/features/products/presentation/views/product_detail.view.dart';
 import 'package:aldi_m_alpaujan_mobile_front_end/shared/utils/main_helpers.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 
 class ProductsController extends ApiPagination<Product> {
@@ -34,24 +34,28 @@ class ProductsController extends ApiPagination<Product> {
     return getData();
   }
 
-  Future<void> deleteProducts() async {
+  Future<void> bulkDelete() async {
     if (selectedItem.isNotEmpty) {
-      final result = await modalHelper.confirm(
-        message: 'Apakah Anda yakin ingin menghapus data?',
-      );
-      if (result == true) {
-        // TODO: delete data
-      }
+      await deleteProducts(selectedItem);
     } else {
       modalHelper.info(message: 'Silahkan pilih data yang ingin dihapus');
     }
   }
 
-  void onCardTap(int id) {
+  Future<void> deleteProducts(List<int> ids) async {
+    final result = await modalHelper.confirm(
+      message: 'Apakah Anda yakin ingin menghapus data?',
+    );
+    if (result == true) {
+      // TODO: delete data
+    }
+  }
+
+  void onCardTap(Product item) {
     if (editMode) {
-      setSelectedItem(id);
+      setSelectedItem(item.id);
     } else {
-      modalHelper.showBottomBar(Container());
+      modalHelper.showBottomBar(ProductDetailView(item: item));
     }
   }
 

@@ -15,6 +15,10 @@ class ProductRes extends BaseResponse<List<Product>> {
 class Product {
   @JsonKey(name: 'id')
   final int id;
+  @JsonKey(name: 'category_id')
+  final int categoryId;
+  @JsonKey(name: 'category_name')
+  final String categoryName;
   @JsonKey(name: 'product_name')
   final String productName;
   @JsonKey(name: 'stock')
@@ -26,6 +30,8 @@ class Product {
 
   Product({
     required this.id,
+    required this.categoryId,
+    required this.categoryName,
     required this.productName,
     required this.stock,
     required this.group,
