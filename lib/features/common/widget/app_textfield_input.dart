@@ -12,6 +12,7 @@ class AppTextFieldInput extends StatefulWidget {
   final TextInputAction? textInputAction;
   final TextEditingController? controller;
   final bool isDropDown;
+  final bool isRequired;
   final bool isArea;
   final bool readOnly;
   final bool numberOnly;
@@ -38,6 +39,7 @@ class AppTextFieldInput extends StatefulWidget {
     this.isDropDown = false,
     this.isCurrency = false,
     this.obscureText = false,
+    this.isRequired = false,
     this.controller,
     this.textInputAction,
     this.onTap,
@@ -62,7 +64,7 @@ class _AppTextFieldInputState extends State<AppTextFieldInput> {
   var hide = false.obs;
   var dropDownValue = ''.obs;
   final currencyFormatter = CurrencyTextInputFormatter.currency(
-    symbol: "Rp",
+    symbol: "Rp ",
     locale: 'id',
     decimalDigits: 0,
   );
@@ -82,6 +84,13 @@ class _AppTextFieldInputState extends State<AppTextFieldInput> {
     node.addListener(() {
       hasfocus.value = node.hasFocus;
     });
+    if (widget.isCurrency && widget.controller?.text != '') {
+      Future.delayed(Duration(milliseconds: 500)).then((_) {
+        widget.controller!.text = currencyFormatter.formatDouble(
+          double.parse(widget.controller!.text),
+        );
+      });
+    }
     super.initState();
   }
 
@@ -94,7 +103,7 @@ class _AppTextFieldInputState extends State<AppTextFieldInput> {
           Padding(
             padding: const EdgeInsets.only(bottom: 8.0),
             child: Text(
-              widget.label!,
+              '${widget.label!}${widget.isRequired ? ' *' : ''}',
               style: TextStyle(
                 fontSize: 14,
                 color: widget.enabled ?? true
@@ -152,14 +161,14 @@ class _AppTextFieldInputState extends State<AppTextFieldInput> {
                 decoration: AppTheme.textFieldInputDecoration.copyWith(
                   counterText: "",
                   contentPadding: const EdgeInsets.symmetric(
-                    vertical: 15,
-                    horizontal: 15,
+                    vertical: 10,
+                    horizontal: 12,
                   ),
                   hintText: widget.hintText,
                   hintStyle: const TextStyle(
                     color: AppTheme.capColor,
                     fontWeight: FontWeight.w400,
-                    fontSize: 14,
+                    fontSize: 12,
                   ),
                   prefixIcon: widget.preffixIcon,
                   suffixIcon: widget.obscureText

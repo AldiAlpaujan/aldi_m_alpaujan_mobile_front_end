@@ -8,7 +8,7 @@ import 'package:get/get.dart';
 
 class AppBarSearch extends StatefulWidget implements PreferredSizeWidget {
   final String title;
-  final String hintText;
+  final String? hintText;
   final bool withLeading;
   final bool centerTitle;
   final Function(String)? onChanged;
@@ -19,7 +19,7 @@ class AppBarSearch extends StatefulWidget implements PreferredSizeWidget {
     required this.title,
     this.withLeading = true,
     this.onChanged,
-    required this.hintText,
+    this.hintText = 'Pencarian...',
     this.centerTitle = false,
   });
 
@@ -77,7 +77,7 @@ class _AppBarSearchState extends State<AppBarSearch> {
           decoration: const BoxDecoration(
             boxShadow: [
               BoxShadow(
-                blurRadius: 12,
+                blurRadius: 8,
                 color: AppTheme.shadowColor,
                 offset: Offset(-1, 0),
               ),

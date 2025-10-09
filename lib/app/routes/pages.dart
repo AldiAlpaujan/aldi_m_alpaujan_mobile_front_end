@@ -8,6 +8,8 @@ import 'package:aldi_m_alpaujan_mobile_front_end/features/products/presentation/
 import 'package:aldi_m_alpaujan_mobile_front_end/features/products/presentation/controllers/products.controller.dart';
 import 'package:aldi_m_alpaujan_mobile_front_end/features/products/presentation/pages/product_form.page.dart';
 import 'package:aldi_m_alpaujan_mobile_front_end/features/products/presentation/controllers/product_form.controller.dart';
+import 'package:aldi_m_alpaujan_mobile_front_end/features/products/presentation/pages/product_category.page.dart';
+import 'package:aldi_m_alpaujan_mobile_front_end/features/products/presentation/controllers/product_category.controller.dart';
 
 part 'routes.dart';
 
@@ -31,6 +33,13 @@ class AppPages {
       page: () => const ProductFormPage(),
       binding: BindingsBuilder(
         () => Get.lazyPut(() => ProductFormController()),
+      ),
+    ),
+    GetPage(
+      name: Routes.productCategory,
+      page: () => const ProductCategoryPage(),
+      binding: BindingsBuilder(
+        () => Get.lazyPut(() => ProductCategoryController()),
       ),
     ),
   ];

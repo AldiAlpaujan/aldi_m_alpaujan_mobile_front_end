@@ -26,8 +26,8 @@ Map<String, dynamic> _$ProductCategoryLookupResToJson(
 ProductCategory _$ProductCategoryFromJson(Map<String, dynamic> json) =>
     ProductCategory(
       id: (json['id'] as num).toInt(),
-      label: json['label'] as String,
+      name: json['name'] as String,
     );
 
 Map<String, dynamic> _$ProductCategoryToJson(ProductCategory instance) =>
-    <String, dynamic>{'id': instance.id, 'label': instance.label};
+    <String, dynamic>{'id': instance.id, 'name': instance.name};

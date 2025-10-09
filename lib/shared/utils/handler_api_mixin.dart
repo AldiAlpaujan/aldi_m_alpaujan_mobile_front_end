@@ -19,7 +19,8 @@ mixin HandlerApiMixin {
       if (showFailedMsg) {
         final err = result.error!;
         final code = err.response?.statusCode;
-        final message = err.message ?? "tidak dapat mengirim permintaan";
+        final message =
+            err.response?.data['message'] ?? "tidak dapat mengirim permintaan";
 
         if (code == 401) return;
         if (code == 500) {

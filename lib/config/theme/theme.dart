@@ -104,8 +104,9 @@ class AppTheme {
   //
   // AppTextField decoration configuration
   //
-  static const _borderTextFieldInput = OutlineInputBorder(
+  static final _borderTextFieldInput = OutlineInputBorder(
     borderSide: BorderSide(color: AppTheme.textFieldBorderColor, width: 1),
+    borderRadius: BorderRadius.circular(8),
   );
   static final textFieldInputDecoration = InputDecoration(
     isDense: true,

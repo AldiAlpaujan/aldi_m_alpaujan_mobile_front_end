@@ -14,9 +14,9 @@ class ProductCategoryLookupRes extends BaseResponse<List<ProductCategory>> {
 @JsonSerializable()
 class ProductCategory {
   final int id;
-  final String label;
+  final String name;
 
-  ProductCategory({required this.id, required this.label});
+  ProductCategory({required this.id, required this.name});
 
   factory ProductCategory.fromJson(Map<String, dynamic> json) =>
       _$ProductCategoryFromJson(json);

@@ -76,7 +76,6 @@ class _AppFixBtmButtonState extends State<AppFixBtmButton>
             widget.child ??
                 SizedBox(
                   width: double.infinity,
-                  height: 42,
                   child: ElevatedButton(
                     onPressed: widget.isActive ? widget.onPressed : null,
                     style: widget.style,

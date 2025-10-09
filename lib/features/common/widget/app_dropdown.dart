@@ -7,6 +7,7 @@ class AppDropDown extends StatelessWidget {
   final String hintText;
   final String? value;
   final bool hideLabel;
+  final bool isRequired;
   final List<String> items;
   final String? Function(String?)? validator;
   final Function(String?)? onChanged;
@@ -19,6 +20,7 @@ class AppDropDown extends StatelessWidget {
     this.validator,
     this.onChanged,
     this.hideLabel = false,
+    this.isRequired = false,
   });
 
   @override
@@ -30,7 +32,7 @@ class AppDropDown extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(bottom: 8.0),
             child: Text(
-              label!,
+              '${label!}${isRequired ? ' *' : ''}',
               style: const TextStyle(fontSize: 14, color: AppTheme.titleColor),
             ),
           ),
@@ -42,7 +44,7 @@ class AppDropDown extends StatelessWidget {
               hint: Text(
                 hintText,
                 style: const TextStyle(
-                  fontSize: 14,
+                  fontSize: 13,
                   color: AppTheme.capColor,
                   fontWeight: FontWeight.w500,
                 ),
@@ -55,19 +57,22 @@ class AppDropDown extends StatelessWidget {
                 fontSize: 14,
                 fontFamily: AppTheme.fontFamily,
               ),
-              icon: Icon(MdiIcons.chevronDown, color: AppTheme.capColor),
+              icon: Icon((MdiIcons.chevronDown), color: AppTheme.capColor),
               onChanged: onChanged,
-              alignment: Alignment.bottomLeft,
+              alignment: Alignment.centerLeft,
               padding: EdgeInsets.zero,
               autovalidateMode: AutovalidateMode.onUserInteraction,
               decoration: AppTheme.textFieldInputDecoration.copyWith(
-                contentPadding: const EdgeInsets.fromLTRB(0, 14, 8, 14),
+                contentPadding: const EdgeInsets.symmetric(
+                  horizontal: 12,
+                  vertical: 10,
+                ),
               ),
               items: items.map((e) => buildMenuItem(e)).toList(),
               selectedItemBuilder: (BuildContext context) {
                 return items.map<Widget>((String item) {
                   return Container(
-                    alignment: Alignment.bottomLeft,
+                    alignment: Alignment.centerLeft,
                     constraints: const BoxConstraints(minWidth: 100),
                     child: Text(
                       item,

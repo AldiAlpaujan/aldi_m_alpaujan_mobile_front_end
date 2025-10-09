@@ -77,7 +77,10 @@ class ProductDetailView extends GetView<ProductsController>
               ),
               child: Text("Hapus Barang", style: TextStyle(color: Colors.red)),
             ).expand,
-            ElevatedButton(onPressed: () {}, child: Text("Edit Barang")).expand,
+            ElevatedButton(
+              onPressed: () => controller.openForm(item: item),
+              child: Text("Edit Barang"),
+            ).expand,
           ],
         ),
       ],

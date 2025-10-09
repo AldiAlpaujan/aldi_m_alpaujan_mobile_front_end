@@ -1,3 +1,4 @@
+import 'package:aldi_m_alpaujan_mobile_front_end/app/routes/pages.dart';
 import 'package:aldi_m_alpaujan_mobile_front_end/config/bases/base_api_pagination.dart';
 import 'package:aldi_m_alpaujan_mobile_front_end/features/products/domain/models/request/delete_product_req.dart';
 import 'package:aldi_m_alpaujan_mobile_front_end/features/products/domain/models/request/product_req.dart';
@@ -64,6 +65,18 @@ class ProductsController extends ApiPagination<Product> {
           getData();
           onSuccess?.call();
         },
+      );
+    }
+  }
+
+  Future<void> openForm({Product? item}) async {
+    final result = await Get.toNamed(Routes.productForm, arguments: item);
+    if (result == true) {
+      getData();
+      modalHelper.info(
+        message: item == null
+            ? 'Data berhasil ditambahkan'
+            : 'Data berhasil diubah',
       );
     }
   }

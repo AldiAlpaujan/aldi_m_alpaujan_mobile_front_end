@@ -18,7 +18,7 @@ class ProductsPage extends GetView<ProductsController> {
         title: 'List Stok Barang',
         hintText: 'Pencarian...',
         centerTitle: true,
-        // withLeading: false,
+        withLeading: false,
         onChanged: (v) => controller.getData(keyword: v),
       ),
       floatingActionButton: Obx(() {
@@ -26,8 +26,8 @@ class ProductsPage extends GetView<ProductsController> {
           return SizedBox();
         }
         return FloatingActionButton(
+          onPressed: controller.openForm,
           child: const Icon(Icons.add),
-          onPressed: () => Get.toNamed('/products/form'),
         );
       }),
       body: Obx(

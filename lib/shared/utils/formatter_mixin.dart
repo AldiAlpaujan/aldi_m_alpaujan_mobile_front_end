@@ -28,6 +28,7 @@ mixin FormatterMixin {
     return NumberFormat.currency(
       locale: 'id',
       symbol: withRp ? "Rp " : "",
+      decimalDigits: 0,
     ).format(money);
   }
 
