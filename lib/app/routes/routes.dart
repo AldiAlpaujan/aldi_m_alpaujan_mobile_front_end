@@ -5,4 +5,5 @@ class Routes {
   static const String initialization = '/initialization';
   static const String login = '/login';
   static const String products = '/products';
+  static const String productForm = '/product-form';
 }

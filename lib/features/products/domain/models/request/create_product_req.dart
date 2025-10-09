@@ -25,4 +25,6 @@ class CreateProductReq {
 
   factory CreateProductReq.fromJson(Map<String, dynamic> json) =>
       _$CreateProductReqFromJson(json);
+
+  Map<String, dynamic> toJson() => _$CreateProductReqToJson(this);
 }

@@ -66,7 +66,8 @@ class ProductDetailView extends GetView<ProductsController>
           spacing: 12,
           children: [
             TextButton(
-              onPressed: () => controller.deleteProducts([item.id]),
+              onPressed: () =>
+                  controller.deleteProducts([item.id], onSuccess: Get.back),
               style: TextButton.styleFrom(
                 overlayColor: Colors.red,
                 side: BorderSide(width: 1.2, color: Colors.red),

@@ -28,4 +28,6 @@ class UpdateProductReq {
 
   factory UpdateProductReq.fromJson(Map<String, dynamic> json) =>
       _$UpdateProductReqFromJson(json);
+
+  Map<String, dynamic> toJson() => _$UpdateProductReqToJson(this);
 }

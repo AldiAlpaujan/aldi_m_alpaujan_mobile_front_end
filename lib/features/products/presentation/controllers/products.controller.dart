@@ -1,9 +1,12 @@
 import 'package:aldi_m_alpaujan_mobile_front_end/config/bases/base_api_pagination.dart';
+import 'package:aldi_m_alpaujan_mobile_front_end/features/products/domain/models/request/delete_product_req.dart';
 import 'package:aldi_m_alpaujan_mobile_front_end/features/products/domain/models/request/product_req.dart';
 import 'package:aldi_m_alpaujan_mobile_front_end/features/products/domain/models/response/product_res.dart';
+import 'package:aldi_m_alpaujan_mobile_front_end/features/products/domain/usecases/delete_products_uc.dart';
 import 'package:aldi_m_alpaujan_mobile_front_end/features/products/domain/usecases/get_products_uc.dart';
 import 'package:aldi_m_alpaujan_mobile_front_end/features/products/presentation/views/product_detail.view.dart';
 import 'package:aldi_m_alpaujan_mobile_front_end/shared/utils/main_helpers.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class ProductsController extends ApiPagination<Product> {
@@ -36,18 +39,32 @@ class ProductsController extends ApiPagination<Product> {
 
   Future<void> bulkDelete() async {
     if (selectedItem.isNotEmpty) {
-      await deleteProducts(selectedItem);
+      await deleteProducts(
+        selectedItem,
+        onSuccess: () => _selectedItem.value = [],
+      );
     } else {
       modalHelper.info(message: 'Silahkan pilih data yang ingin dihapus');
     }
   }
 
-  Future<void> deleteProducts(List<int> ids) async {
+  Future<void> deleteProducts(List<int> ids, {VoidCallback? onSuccess}) async {
     final result = await modalHelper.confirm(
       message: 'Apakah Anda yakin ingin menghapus data?',
     );
     if (result == true) {
-      // TODO: delete data
+      modalHelper.loading();
+      final result = await Get.find<DeleteProductsUc>().call(
+        request: DeleteProductReq(ids: ids),
+      );
+      Get.back();
+      handleApiResult(
+        result,
+        onSuccess: (_) {
+          getData();
+          onSuccess?.call();
+        },
+      );
     }
   }
 

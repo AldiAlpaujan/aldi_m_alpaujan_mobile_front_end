@@ -11,4 +11,6 @@ class DeleteProductReq {
 
   factory DeleteProductReq.fromJson(Map<String, dynamic> json) =>
       _$DeleteProductReqFromJson(json);
+
+  Map<String, dynamic> toJson() => _$DeleteProductReqToJson(this);
 }
