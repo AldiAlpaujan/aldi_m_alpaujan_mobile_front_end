@@ -1,1 +1,0 @@
-This folder is core of the application and etc.

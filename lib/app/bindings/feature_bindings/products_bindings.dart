@@ -4,6 +4,9 @@ import 'package:aldi_m_alpaujan_mobile_front_end/features/products/data/reposito
 import 'package:aldi_m_alpaujan_mobile_front_end/features/products/data/src/products_api_service.dart';
 import 'package:aldi_m_alpaujan_mobile_front_end/features/products/domain/repositories/products_repository.dart';
 import 'package:aldi_m_alpaujan_mobile_front_end/features/products/domain/usecases/get_products_uc.dart';
+import 'package:aldi_m_alpaujan_mobile_front_end/features/products/domain/usecases/create_products_uc.dart';
+import 'package:aldi_m_alpaujan_mobile_front_end/features/products/domain/usecases/update_products_uc.dart';
+import 'package:aldi_m_alpaujan_mobile_front_end/features/products/domain/usecases/deleteproducts_uc.dart';
 
 class ProductsBindings extends Bindings {
   @override
@@ -15,6 +18,18 @@ class ProductsBindings extends Bindings {
     );
     Get.lazyPut(
       () => GetProductsUc(Get.find<ProductsRepository>()),
+      fenix: true,
+    );
+    Get.lazyPut(
+      () => CreateProductsUc(Get.find<ProductsRepository>()),
+      fenix: true,
+    );
+    Get.lazyPut(
+      () => UpdateProductsUc(Get.find<ProductsRepository>()),
+      fenix: true,
+    );
+    Get.lazyPut(
+      () => DeleteProductsUc(Get.find<ProductsRepository>()),
       fenix: true,
     );
   }

@@ -1,1 +1,0 @@
-This folder is for execute abstraction class function

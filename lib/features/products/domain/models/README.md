@@ -1,1 +1,0 @@
-This folder is to accommodate responses and requests
