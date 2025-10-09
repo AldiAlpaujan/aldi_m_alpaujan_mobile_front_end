@@ -84,6 +84,13 @@ class _AppTextFieldInputState extends State<AppTextFieldInput> {
     node.addListener(() {
       hasfocus.value = node.hasFocus;
     });
+
+    if (widget.isCurrency && widget.controller?.text != "") {
+      final formattedText = currencyFormatter.formatString(
+        widget.controller?.text ?? "",
+      );
+      widget.controller?.text = formattedText;
+    }
     super.initState();
   }
 

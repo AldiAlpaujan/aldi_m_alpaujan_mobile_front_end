@@ -72,7 +72,15 @@ class ProductsController extends ApiPagination<Product> {
   Future<void> openForm({Product? item}) async {
     final result = await Get.toNamed(Routes.productForm, arguments: item);
     if (result == true) {
-      getData();
+      if (item != null) {
+        Get.back();
+        await getData();
+        modalHelper.showBottomBar(
+          ProductDetailView(item: data.firstWhere((e) => e.id == item.id)),
+        );
+      } else {
+        getData();
+      }
       modalHelper.info(
         message: item == null
             ? 'Data berhasil ditambahkan'
