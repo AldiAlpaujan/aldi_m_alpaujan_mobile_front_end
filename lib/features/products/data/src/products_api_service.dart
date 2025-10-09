@@ -1,8 +1,10 @@
 import 'package:aldi_m_alpaujan_mobile_front_end/features/common/domain/models/response/default_res.dart';
 import 'package:aldi_m_alpaujan_mobile_front_end/features/products/domain/models/request/create_product_req.dart';
 import 'package:aldi_m_alpaujan_mobile_front_end/features/products/domain/models/request/delete_product_req.dart';
+import 'package:aldi_m_alpaujan_mobile_front_end/features/products/domain/models/request/product_category_lookup_req.dart';
 import 'package:aldi_m_alpaujan_mobile_front_end/features/products/domain/models/request/product_req.dart';
 import 'package:aldi_m_alpaujan_mobile_front_end/features/products/domain/models/request/update_product_req.dart';
+import 'package:aldi_m_alpaujan_mobile_front_end/features/products/domain/models/response/product_category_lookup_res.dart';
 import 'package:aldi_m_alpaujan_mobile_front_end/features/products/domain/models/response/product_res.dart';
 import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
@@ -30,5 +32,10 @@ abstract class ProductsApiService {
   @DELETE(Apis.products)
   Future<HttpResponse<DefaultRes>> deleteProducts(
     @Body() DeleteProductReq request,
+  );
+
+  @GET(Apis.productCategoryLookup)
+  Future<HttpResponse<ProductCategoryLookupRes>> productCategoryLookup(
+    @Queries() ProductCategoryLookupReq request,
   );
 }

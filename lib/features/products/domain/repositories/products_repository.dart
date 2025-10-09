@@ -2,8 +2,10 @@ import 'package:aldi_m_alpaujan_mobile_front_end/config/bases/base_data_state.da
 import 'package:aldi_m_alpaujan_mobile_front_end/features/common/domain/models/response/default_res.dart';
 import 'package:aldi_m_alpaujan_mobile_front_end/features/products/domain/models/request/create_product_req.dart';
 import 'package:aldi_m_alpaujan_mobile_front_end/features/products/domain/models/request/delete_product_req.dart';
+import 'package:aldi_m_alpaujan_mobile_front_end/features/products/domain/models/request/product_category_lookup_req.dart';
 import 'package:aldi_m_alpaujan_mobile_front_end/features/products/domain/models/request/product_req.dart';
 import 'package:aldi_m_alpaujan_mobile_front_end/features/products/domain/models/request/update_product_req.dart';
+import 'package:aldi_m_alpaujan_mobile_front_end/features/products/domain/models/response/product_category_lookup_res.dart';
 import 'package:aldi_m_alpaujan_mobile_front_end/features/products/domain/models/response/product_res.dart';
 
 abstract class ProductsRepository {
@@ -14,4 +16,8 @@ abstract class ProductsRepository {
   Future<DataState<DefaultRes>> updateproducts(UpdateProductReq request);
 
   Future<DataState<DefaultRes>> deleteProducts(DeleteProductReq request);
+
+  Future<DataState<ProductCategoryLookupRes>> productCategoryLookup(
+    ProductCategoryLookupReq request,
+  );
 }
