@@ -1,3 +1,4 @@
+import 'package:aldi_m_alpaujan_mobile_front_end/config/theme/theme.dart';
 import 'package:aldi_m_alpaujan_mobile_front_end/features/common/widget/app_bar_search.dart';
 import 'package:aldi_m_alpaujan_mobile_front_end/features/common/widget/app_fix_btm_button.dart';
 import 'package:aldi_m_alpaujan_mobile_front_end/features/common/widget/app_textfield_input.dart';
@@ -5,6 +6,7 @@ import 'package:aldi_m_alpaujan_mobile_front_end/shared/utils/validator_mixin.da
 import 'package:flutter/material.dart';
 import 'package:aldi_m_alpaujan_mobile_front_end/features/products/presentation/controllers/product_form.controller.dart';
 import 'package:get/get.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 class ProductFormPage extends GetView<ProductFormController>
     with ValidatorMixin {
@@ -42,6 +44,10 @@ class ProductFormPage extends GetView<ProductFormController>
                       controller: controller.categoryC,
                       validator: (v) => emptyValidator('Kategori barang', v!),
                       onTap: controller.pickCategory,
+                      suffixIcon: Icon(
+                        MdiIcons.unfoldMoreVertical,
+                        color: AppTheme.capColor,
+                      ),
                     ),
                     AppTextFieldInput(
                       isRequired: true,

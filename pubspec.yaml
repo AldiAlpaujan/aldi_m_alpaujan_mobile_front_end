@@ -83,7 +83,7 @@ dependencies:
   shared_preferences: ^2.3.3
 
   # currency format
-  currency_text_input_formatter: ^2.2.6
+  currency_text_input_formatter: ^2.3.0
 
   # carousel
   carousel_slider: ^5.0.0

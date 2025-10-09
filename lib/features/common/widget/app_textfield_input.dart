@@ -64,7 +64,7 @@ class _AppTextFieldInputState extends State<AppTextFieldInput> {
   var hide = false.obs;
   var dropDownValue = ''.obs;
   final currencyFormatter = CurrencyTextInputFormatter.currency(
-    symbol: "Rp ",
+    symbol: "Rp",
     locale: 'id',
     decimalDigits: 0,
   );
@@ -84,13 +84,6 @@ class _AppTextFieldInputState extends State<AppTextFieldInput> {
     node.addListener(() {
       hasfocus.value = node.hasFocus;
     });
-    if (widget.isCurrency && widget.controller?.text != '') {
-      Future.delayed(Duration(milliseconds: 500)).then((_) {
-        widget.controller!.text = currencyFormatter.formatDouble(
-          double.parse(widget.controller!.text),
-        );
-      });
-    }
     super.initState();
   }
 
@@ -155,8 +148,8 @@ class _AppTextFieldInputState extends State<AppTextFieldInput> {
                     ? TextInputType.number
                     : null,
                 inputFormatters: [
-                  if (widget.numberOnly) FilteringTextInputFormatter.digitsOnly,
                   if (widget.isCurrency) currencyFormatter,
+                  if (widget.numberOnly) FilteringTextInputFormatter.digitsOnly,
                 ],
                 decoration: AppTheme.textFieldInputDecoration.copyWith(
                   counterText: "",
