@@ -1,0 +1,90 @@
+import 'package:aldi_m_alpaujan_mobile_front_end/config/bases/base_api_pagination.dart';
+import 'package:aldi_m_alpaujan_mobile_front_end/features/products/domain/models/request/product_req.dart';
+import 'package:aldi_m_alpaujan_mobile_front_end/features/products/domain/models/response/product_res.dart';
+import 'package:aldi_m_alpaujan_mobile_front_end/features/products/domain/usecases/get_products_uc.dart';
+import 'package:aldi_m_alpaujan_mobile_front_end/shared/utils/main_helpers.dart';
+import 'package:flutter/widgets.dart';
+import 'package:get/get.dart';
+
+class ProductsController extends ApiPagination<Product> {
+  final _editMode = false.obs;
+  final _selectedItem = <int>[].obs;
+
+  bool get editMode => _editMode.value;
+  bool get isSelectAll => _selectedItem.length == data.length;
+  List<int> get selectedItem => _selectedItem();
+
+  @override
+  Future<void> getData({bool isLoad = false, String? keyword}) async {
+    final uc = Get.find<GetProductsUc>().call;
+    await runRequest(
+      (req) => uc(request: ProductReq.fromParent(req)),
+      isLoad,
+      keyword,
+    );
+  }
+
+  @override
+  Future<void> loadData() async {
+    await getData(isLoad: true);
+  }
+
+  @override
+  Future<void> refreshData() {
+    return getData();
+  }
+
+  Future<void> deleteProducts() async {
+    if (selectedItem.isNotEmpty) {
+      final result = await modalHelper.confirm(
+        message: 'Apakah Anda yakin ingin menghapus data?',
+      );
+      if (result == true) {
+        // TODO: delete data
+      }
+    } else {
+      modalHelper.info(message: 'Silahkan pilih data yang ingin dihapus');
+    }
+  }
+
+  void onCardTap(int id) {
+    if (editMode) {
+      setSelectedItem(id);
+    } else {
+      modalHelper.showBottomBar(Container());
+    }
+  }
+
+  void editModeToggle() {
+    _editMode.value = !editMode;
+    if (!editMode) {
+      _selectedItem.value = [];
+    }
+  }
+
+  void setSelectedItem(int value) {
+    late List<int> newItems;
+    if (_selectedItem.contains(value)) {
+      newItems = _selectedItem.where((e) => e != value).toList();
+    } else {
+      newItems = [..._selectedItem, value];
+    }
+    _selectedItem.value = newItems;
+  }
+
+  void selectAllToggle() {
+    if (_selectedItem.length == data.length) {
+      _selectedItem.value = [];
+    } else {
+      _selectedItem.value = data.map((e) => e.id).toList();
+    }
+  }
+
+  bool itemIsSelected(int id) => _selectedItem.contains(id);
+
+  @override
+  void onInit() {
+    getData();
+    super.onInit();
+  }
+}

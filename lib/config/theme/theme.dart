@@ -3,10 +3,26 @@ import 'package:flutter/material.dart';
 
 class AppTheme {
   // font family
-  static const fontFamily = "Poppins";
+  static const fontFamily = "Nunito";
+
+  static const MaterialColor primarySwatch = MaterialColor(
+    0xFF001767,
+    <int, Color>{
+      50: Color(0xFFE0E5F0),
+      100: Color(0xFFB3BDD9),
+      200: Color(0xFF8092C0),
+      300: Color(0xFF4D67A7),
+      400: Color(0xFF26488F),
+      500: Color(0xFF001767), // warna utama
+      600: Color(0xFF001561),
+      700: Color(0xFF001056),
+      800: Color(0xFF000C4C),
+      900: Color(0xFF000539),
+    },
+  );
 
   // main UI color
-  static const primaryColor = Color(0xFF42A04B);
+  static const primaryColor = Color(0xFF001767);
   static const bgColor = Colors.white;
   static const borderColor = Color(0xFFDFDFDF);
   static const textFieldBorderColor = Color(0xFFD5D8E2);

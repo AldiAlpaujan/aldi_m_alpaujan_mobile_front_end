@@ -106,7 +106,7 @@ class ModalHelper {
                 Get.back(result: true);
               }
             },
-            child: const Text('OK'),
+            child: const Text('Ya'),
           ),
         ],
       ),
@@ -144,7 +144,7 @@ class ModalHelper {
                 Get.back();
               }
             },
-            child: const Text('OK'),
+            child: const Text('Ya'),
           ),
         ],
       ),
@@ -172,7 +172,7 @@ class ModalHelper {
                 Get.back(result: false);
               }
             },
-            child: const Text('CANCEL'),
+            child: const Text('Batal'),
           ),
           TextButton(
             onPressed: () {
@@ -182,7 +182,7 @@ class ModalHelper {
                 Get.back(result: true);
               }
             },
-            child: const Text('OK'),
+            child: const Text('Ya'),
           ),
         ],
       ),

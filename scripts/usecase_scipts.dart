@@ -108,9 +108,9 @@ void _createUseCase(String name, String featureName) {
 
   final content =
       '''
-import 'package:flutter_clean_architecture/config/bases/base_data_state.dart';
-import 'package:flutter_clean_architecture/config/bases/base_usecase.dart';
-import 'package:flutter_clean_architecture/features/$featureName/domain/repositories/${featureName}_repository.dart';
+import 'package:aldi_m_alpaujan_mobile_front_end/config/bases/base_data_state.dart';
+import 'package:aldi_m_alpaujan_mobile_front_end/config/bases/base_usecase.dart';
+import 'package:aldi_m_alpaujan_mobile_front_end/features/$featureName/domain/repositories/${featureName}_repository.dart';
 
 class ${useCaseName}Uc extends UseCase<DataState<T>, void> {
   final ${featureName.capitalize()}Repository ${featureName}Repository;
@@ -142,7 +142,7 @@ void _signUseCaseIntoBindings(String name, String featureName) {
       r'Bindings\s+extends\s+Bindings\s*\{';
 
   String newImport =
-      "import 'package:flutter_clean_architecture/features/$featureName/domain/usecases/${name}_uc.dart';";
+      "import 'package:aldi_m_alpaujan_mobile_front_end/features/$featureName/domain/usecases/${name}_uc.dart';";
 
   String updatedContent = content.replaceFirstMapped(
     RegExp(classPattern, multiLine: true),

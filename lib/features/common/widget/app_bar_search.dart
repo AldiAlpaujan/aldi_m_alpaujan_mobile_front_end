@@ -1,14 +1,16 @@
+import 'package:aldi_m_alpaujan_mobile_front_end/features/common/widget/app_svg_icon.dart';
+import 'package:aldi_m_alpaujan_mobile_front_end/shared/constants/assets.dart';
 import 'package:flutter/material.dart';
 import 'package:aldi_m_alpaujan_mobile_front_end/config/theme/theme.dart';
 import 'package:aldi_m_alpaujan_mobile_front_end/features/common/widget/app_back_button.dart';
 import 'package:aldi_m_alpaujan_mobile_front_end/shared/utils/function.dart';
 import 'package:get/get.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 class AppBarSearch extends StatefulWidget implements PreferredSizeWidget {
   final String title;
   final String hintText;
   final bool withLeading;
+  final bool centerTitle;
   final Function(String)? onChanged;
   final List<Widget>? actions;
   const AppBarSearch({
@@ -18,6 +20,7 @@ class AppBarSearch extends StatefulWidget implements PreferredSizeWidget {
     this.withLeading = true,
     this.onChanged,
     required this.hintText,
+    this.centerTitle = false,
   });
 
   @override
@@ -72,10 +75,18 @@ class _AppBarSearchState extends State<AppBarSearch> {
         onPopInvokedWithResult: (_, _) => onWillPop(),
         child: Container(
           decoration: const BoxDecoration(
-            border: Border(bottom: BorderSide(color: AppTheme.borderColor)),
+            boxShadow: [
+              BoxShadow(
+                blurRadius: 12,
+                color: AppTheme.shadowColor,
+                offset: Offset(-1, 0),
+              ),
+            ],
           ),
           child: AppBar(
             elevation: 0,
+            titleSpacing: widget.withLeading ? 0 : null,
+            centerTitle: widget.centerTitle,
             backgroundColor: Colors.white,
             leading: widget.withLeading
                 ? AppBackButton(onPressed: onLeadingTap, color: Colors.black)
@@ -88,12 +99,23 @@ class _AppBarSearchState extends State<AppBarSearch> {
             ),
             iconTheme: const IconThemeData(color: Colors.black),
             actions: [
-              IconButton(
-                onPressed: onSearch,
-                icon: Icon(
-                  searchMode.value ? MdiIcons.close : MdiIcons.magnify,
+              if (widget.onChanged != null)
+                IconButton(
+                  onPressed: onSearch,
+                  icon: searchMode.value
+                      ? Text(
+                          String.fromCharCode(Icons.close.codePoint),
+                          style: TextStyle(
+                            inherit: false,
+                            fontSize: 18.0,
+                            color: Colors.black,
+                            fontWeight: FontWeight.w500,
+                            fontFamily: Icons.close.fontFamily,
+                            package: Icons.close.fontPackage,
+                          ),
+                        )
+                      : AppSvgIcon(svg: Assets.svg.magnify, size: 18),
                 ),
-              ),
               ...widget.actions ?? [],
             ],
           ),

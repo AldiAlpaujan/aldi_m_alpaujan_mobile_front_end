@@ -7,24 +7,18 @@ class PaginationReq {
   @JsonKey(name: "page")
   int? page;
 
-  @JsonKey(name: "per_page")
-  int? rowsPerPage;
+  @JsonKey(name: "limit")
+  int? limit;
 
   @JsonKey(name: "search")
   String? search;
 
-  PaginationReq({
-    this.page,
-    this.rowsPerPage,
-    this.search,
-  });
+  PaginationReq({this.page, this.limit, this.search});
 
-  PaginationReq copyWith({
-    String? search,
-  }) {
+  PaginationReq copyWith({String? search}) {
     return PaginationReq(
       page: page,
-      rowsPerPage: rowsPerPage,
+      limit: limit,
       search: search ?? this.search,
     );
   }

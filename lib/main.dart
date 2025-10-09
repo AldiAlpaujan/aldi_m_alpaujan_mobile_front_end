@@ -61,7 +61,7 @@ class _MyAppState extends State<MyApp> {
       initialBinding: AppBindings(),
       theme: ThemeData(
         useMaterial3: false,
-        primarySwatch: Colors.green,
+        primarySwatch: AppTheme.primarySwatch,
         fontFamily: AppTheme.fontFamily,
         colorScheme: AppTheme.colorScheme,
         primaryColor: AppTheme.primaryColor,

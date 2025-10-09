@@ -77,8 +77,9 @@ Future<void> createFeature(String featureName) async {
 
 void _repositoryFile(String featureName, String path) {
   final file = File(path);
-  final content = '''
-import 'package:flutter_clean_architecture/config/bases/base_data_state.dart';
+  final content =
+      '''
+import 'package:aldi_m_alpaujan_mobile_front_end/config/bases/base_data_state.dart';
 
 abstract class ${featureName.capitalize()}Repository {}
 ''';
@@ -87,11 +88,12 @@ abstract class ${featureName.capitalize()}Repository {}
 
 void _repositoryImplFile(String featureName, String path) {
   final file = File(path);
-  final content = '''
-import 'package:flutter_clean_architecture/config/bases/base_api_repository.dart';
-import 'package:flutter_clean_architecture/config/bases/base_data_state.dart';
-import 'package:flutter_clean_architecture/features/$featureName/domain/repositories/${featureName}_repository.dart';
-import 'package:flutter_clean_architecture/features/$featureName/data/src/${featureName}_api_service.dart';
+  final content =
+      '''
+import 'package:aldi_m_alpaujan_mobile_front_end/config/bases/base_api_repository.dart';
+import 'package:aldi_m_alpaujan_mobile_front_end/config/bases/base_data_state.dart';
+import 'package:aldi_m_alpaujan_mobile_front_end/features/$featureName/domain/repositories/${featureName}_repository.dart';
+import 'package:aldi_m_alpaujan_mobile_front_end/features/$featureName/data/src/${featureName}_api_service.dart';
 
 class ${featureName.capitalize()}RepositoryImpl extends ApiRepository implements ${featureName.capitalize()}Repository {
   final ${featureName.capitalize()}ApiService ${featureName}ApiService;
@@ -103,10 +105,11 @@ class ${featureName.capitalize()}RepositoryImpl extends ApiRepository implements
 
 void _srcApiFile(String featureName, String path) {
   final file = File(path);
-  final content = '''
+  final content =
+      '''
 import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
-import 'package:flutter_clean_architecture/shared/constants/apis.dart';
+import 'package:aldi_m_alpaujan_mobile_front_end/shared/constants/apis.dart';
 
 part '${featureName}_api_service.g.dart';
 
@@ -127,12 +130,13 @@ void _bindingFile(String featureName) {
     '$featureBindingDirPath/${featureName}_bindings.dart',
   );
 
-  final content = '''
+  final content =
+      '''
 import 'package:get/get.dart';
-import 'package:flutter_clean_architecture/shared/utils/main_helpers.dart';
-import 'package:flutter_clean_architecture/features/$featureName/data/repositories/${featureName}_repository_impl.dart';
-import 'package:flutter_clean_architecture/features/$featureName/data/src/${featureName}_api_service.dart';
-import 'package:flutter_clean_architecture/features/$featureName/domain/repositories/${featureName}_repository.dart';
+import 'package:aldi_m_alpaujan_mobile_front_end/shared/utils/main_helpers.dart';
+import 'package:aldi_m_alpaujan_mobile_front_end/features/$featureName/data/repositories/${featureName}_repository_impl.dart';
+import 'package:aldi_m_alpaujan_mobile_front_end/features/$featureName/data/src/${featureName}_api_service.dart';
+import 'package:aldi_m_alpaujan_mobile_front_end/features/$featureName/domain/repositories/${featureName}_repository.dart';
 
 class ${featureName.capitalize()}Bindings extends Bindings {
   @override
@@ -156,12 +160,13 @@ class ${featureName.capitalize()}Bindings extends Bindings {
 
   // Tambahkan import sebelum `class FeatureBindings`
   String newImport =
-      "import 'package:flutter_clean_architecture/app/bindings/feature_bindings/${featureName}_bindings.dart';";
+      "import 'package:aldi_m_alpaujan_mobile_front_end/app/bindings/feature_bindings/${featureName}_bindings.dart';";
   String classPattern = r'(^\s*class FeatureBindings\s+extends\s+Bindings\s*{)';
 
   String updatedContent = fileFeatureBindingsContent.replaceFirstMapped(
-      RegExp(classPattern, multiLine: true),
-      (match) => '$newImport${match.group(0)}');
+    RegExp(classPattern, multiLine: true),
+    (match) => '$newImport${match.group(0)}',
+  );
 
   // Tambahkan dependencies baru sebelum `}` terakhir
   String pattern = r'\s*}\s*}\s*$';

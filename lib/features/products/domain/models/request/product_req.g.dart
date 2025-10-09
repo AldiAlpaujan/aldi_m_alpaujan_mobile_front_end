@@ -1,19 +1,18 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'pagination_req.dart';
+part of 'product_req.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-PaginationReq _$PaginationReqFromJson(Map<String, dynamic> json) =>
-    PaginationReq(
-      page: (json['page'] as num?)?.toInt(),
-      limit: (json['limit'] as num?)?.toInt(),
-      search: json['search'] as String?,
-    );
+ProductReq _$ProductReqFromJson(Map<String, dynamic> json) => ProductReq(
+  page: (json['page'] as num?)?.toInt(),
+  limit: (json['limit'] as num?)?.toInt(),
+  search: json['search'] as String?,
+);
 
-Map<String, dynamic> _$PaginationReqToJson(PaginationReq instance) =>
+Map<String, dynamic> _$ProductReqToJson(ProductReq instance) =>
     <String, dynamic>{
       'page': instance.page,
       'limit': instance.limit,

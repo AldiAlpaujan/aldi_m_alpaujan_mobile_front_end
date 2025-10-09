@@ -16,9 +16,7 @@ Future<void> createPage(
     return;
   }
 
-  final pageFile = File(
-    '$featurePath/presentation/pages/$pageName.page.dart',
-  );
+  final pageFile = File('$featurePath/presentation/pages/$pageName.page.dart');
   final controllerFile = File(
     '$featurePath/presentation/controllers/$pageName.controller.dart',
   );
@@ -40,9 +38,10 @@ Future<void> createPage(
   late String pageContent, controllerContent;
 
   if (!isPagging) {
-    pageContent = '''
+    pageContent =
+        '''
 import 'package:flutter/material.dart';
-import 'package:flutter_clean_architecture/features/$featurePage/presentation/controllers/$pageName.controller.dart';
+import 'package:aldi_m_alpaujan_mobile_front_end/features/$featurePage/presentation/controllers/$pageName.controller.dart';
 import 'package:get/get.dart';
 
 class ${pageName.toPascalCase()}Page extends GetView<${pageName.toPascalCase()}Controller> {
@@ -64,17 +63,19 @@ class ${pageName.toPascalCase()}Page extends GetView<${pageName.toPascalCase()}C
 }
 ''';
 
-    controllerContent = '''
-import 'package:flutter_clean_architecture/shared/utils/handler_api_mixin.dart';
+    controllerContent =
+        '''
+import 'package:aldi_m_alpaujan_mobile_front_end/shared/utils/handler_api_mixin.dart';
 import 'package:get/get.dart';
 
 class ${pageName.toPascalCase()}Controller extends GetxController with HandlerApiMixin {}
 ''';
   } else {
-    pageContent = '''
+    pageContent =
+        '''
 import 'package:flutter/material.dart';
-import 'package:flutter_clean_architecture/features/common/presentation/views/app_data_list_view.dart';
-import 'package:flutter_clean_architecture/features/$featurePage/presentation/controllers/$pageName.controller.dart';
+import 'package:aldi_m_alpaujan_mobile_front_end/features/common/presentation/views/app_data_list_view.dart';
+import 'package:aldi_m_alpaujan_mobile_front_end/features/$featurePage/presentation/controllers/$pageName.controller.dart';
 import 'package:get/get.dart';
 
 class ${pageName.toPascalCase()}Page extends GetView<${pageName.toPascalCase()}Controller> {
@@ -100,8 +101,9 @@ class ${pageName.toPascalCase()}Page extends GetView<${pageName.toPascalCase()}C
 }
 ''';
 
-    controllerContent = '''
-import 'package:flutter_clean_architecture/config/bases/base_api_pagination.dart';
+    controllerContent =
+        '''
+import 'package:aldi_m_alpaujan_mobile_front_end/config/bases/base_api_pagination.dart';
 
 class ${pageName.toPascalCase()}Controller extends ApiPagination {
 
@@ -160,9 +162,10 @@ void _addRouteAndPage(String featurePage, String pageName) {
   routerFile.writeAsStringSync(updatedRoutesContent);
 
   // Prepare new import statement
-  final pageImport = '''
-import 'package:flutter_clean_architecture/features/$featurePage/presentation/pages/$pageName.page.dart';
-import 'package:flutter_clean_architecture/features/$featurePage/presentation/controllers/$pageName.controller.dart';
+  final pageImport =
+      '''
+import 'package:aldi_m_alpaujan_mobile_front_end/features/$featurePage/presentation/pages/$pageName.page.dart';
+import 'package:aldi_m_alpaujan_mobile_front_end/features/$featurePage/presentation/controllers/$pageName.controller.dart';
 ''';
 
   // Read current pages.dart content
@@ -175,7 +178,8 @@ import 'package:flutter_clean_architecture/features/$featurePage/presentation/co
   );
 
   // Prepare new GetPage
-  final newGetPage = '''
+  final newGetPage =
+      '''
   GetPage(
       name: Routes.$pageName,
       page: () => const ${pageName.toPascalCase()}Page(),
@@ -185,11 +189,11 @@ import 'package:flutter_clean_architecture/features/$featurePage/presentation/co
     ),''';
 
   // Tambahkan GetPage baru sebelum "];" di dalam list pages
-  final updatedPagesContentFinal =
-      updatedPagesContentWithImport.replaceFirstMapped(
-    RegExp(r'(\];\s*\})'), // Cari tanda "];" diikuti penutup kelas "}"
-    (match) => '$newGetPage\n  ];\n}', // Tambahkan GetPage
-  );
+  final updatedPagesContentFinal = updatedPagesContentWithImport
+      .replaceFirstMapped(
+        RegExp(r'(\];\s*\})'), // Cari tanda "];" diikuti penutup kelas "}"
+        (match) => '$newGetPage\n  ];\n}', // Tambahkan GetPage
+      );
 
   // Tulis ulang file pages.dart
   pagesFile.writeAsStringSync(updatedPagesContentFinal);

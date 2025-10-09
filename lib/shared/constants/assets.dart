@@ -7,7 +7,11 @@ class Assets {
 
 class _Html {}
 
-class _Svg {}
+class _Svg {
+  final magnify = 'assets/svg/search-normal.svg';
+  final arrowLeft = 'assets/svg/arrow-left.svg';
+  final close = 'assets/svg/close.svg';
+}
 
 class _Image {
   final errorImg = 'assets/image/img-error.jpg';

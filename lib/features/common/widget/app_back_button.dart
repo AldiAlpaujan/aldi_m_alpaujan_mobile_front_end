@@ -1,6 +1,7 @@
+import 'package:aldi_m_alpaujan_mobile_front_end/features/common/widget/app_svg_icon.dart';
+import 'package:aldi_m_alpaujan_mobile_front_end/shared/constants/assets.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 class AppBackButton extends StatelessWidget {
   final Function()? onPressed;
@@ -11,11 +12,7 @@ class AppBackButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return IconButton(
       onPressed: onPressed ?? Get.back,
-      icon: Icon(
-        MdiIcons.chevronLeft,
-        size: 28,
-        color: color ?? Colors.white,
-      ),
+      icon: AppSvgIcon(svg: Assets.svg.arrowLeft, color: color ?? Colors.white),
     );
   }
 }

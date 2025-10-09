@@ -9,7 +9,7 @@ abstract class ApiPagination<T> extends GetxController with HandlerApiMixin {
   var _keyword = '';
   var _currentPage = 1;
   final _rowsPerPage = 50;
-  final _noData = false.obs;
+  final _noData = true.obs;
   final _isError = false.obs;
   final _isLoading = false.obs;
   final _data = <T>[].obs;
@@ -35,11 +35,7 @@ abstract class ApiPagination<T> extends GetxController with HandlerApiMixin {
     _keyword = keyword ?? _keyword;
 
     final result = await request(
-      PaginationReq(
-        page: _currentPage,
-        rowsPerPage: _rowsPerPage,
-        search: _keyword,
-      ),
+      PaginationReq(page: _currentPage, limit: _rowsPerPage, search: _keyword),
     );
     _isLoading.value = false;
 
