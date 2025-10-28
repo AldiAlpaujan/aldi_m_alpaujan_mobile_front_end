@@ -28,6 +28,11 @@ class ReimbursController extends GetxController with HandlerApiMixin {
 
   Future<void> createReimburs() async {
     if (formKey.currentState!.validate()) {
+      if (proofs.isEmpty) {
+        modalHelper.info(message: 'Silahkan tambahkan bukti');
+        return;
+      }
+
       final reimburs = Reimburs(
         date: dateC.text,
         claimType: claimTypeC.text,
@@ -40,6 +45,7 @@ class ReimbursController extends GetxController with HandlerApiMixin {
       claimTypeC.clear();
       detailC.clear();
       proofs.clear();
+
       Get.toNamed(Routes.reimbursList);
     }
   }

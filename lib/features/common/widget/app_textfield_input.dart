@@ -91,6 +91,16 @@ class _AppTextFieldInputState extends State<AppTextFieldInput> {
       );
       widget.controller?.text = formattedText;
     }
+    if (widget.isDropDown) {
+      widget.controller?.addListener(() {
+        final text = widget.controller!.text;
+        print(dropDownValue.value);
+        print(text);
+        if (dropDownValue.value != '' && text == '') {
+          dropDownValue.value = '';
+        }
+      });
+    }
     super.initState();
   }
 
