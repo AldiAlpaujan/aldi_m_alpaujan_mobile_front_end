@@ -48,13 +48,22 @@ class ModalHelper {
 
   Future<void> showBottomBar(Widget content) async {
     await showModalBottomSheet(
-      isScrollControlled: true,
       context: Get.context!,
+      isScrollControlled: true,
       backgroundColor: Colors.white,
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(8)),
       ),
-      builder: (context) => content,
+      builder: (context) {
+        return Padding(
+          padding: EdgeInsets.only(
+            bottom: MediaQuery.of(
+              context,
+            ).viewInsets.bottom, // naik saat keyboard muncul
+          ),
+          child: content,
+        );
+      },
     );
   }
 

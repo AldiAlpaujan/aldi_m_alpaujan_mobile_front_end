@@ -115,7 +115,7 @@ class ProductFormController extends GetxController
       categoryC.text = product!.categoryName;
       groupC.text = groups.contains(product!.group) ? product!.group : '';
       stockC.text = product!.stock.toString();
-      priceC.text = product!.price.toString();
+      priceC.text = doubleFormatter(product!.price);
       price = product!.price;
     }
   }

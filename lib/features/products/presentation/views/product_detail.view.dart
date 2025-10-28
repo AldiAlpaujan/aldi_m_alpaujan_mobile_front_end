@@ -6,10 +6,32 @@ import 'package:aldi_m_alpaujan_mobile_front_end/shared/utils/widget_extenstion.
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class ProductDetailView extends GetView<ProductsController>
-    with FormatterMixin {
+class ProductDetailView extends StatefulWidget {
   final Product item;
   const ProductDetailView({super.key, required this.item});
+
+  @override
+  State<ProductDetailView> createState() => _ProductDetailViewState();
+}
+
+class _ProductDetailViewState extends State<ProductDetailView>
+    with FormatterMixin {
+  final controller = Get.find<ProductsController>();
+
+  final _discountPrice = 0.0.obs;
+  final _total = 0.0.obs;
+
+  double get discountPrice => _discountPrice.value;
+  double get total => _total.value;
+
+  final discount = 20;
+
+  @override
+  void initState() {
+    _discountPrice.value = widget.item.price * discount / 100;
+    _total.value = widget.item.price - discountPrice;
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -32,10 +54,14 @@ class ProductDetailView extends GetView<ProductsController>
           ),
           child: Column(
             children: [
-              keyValueItem('Nama Barang', item.productName),
-              keyValueItem('Kategori', item.categoryName),
-              keyValueItem('Kelompok', item.group),
-              keyValueItem('Stok', item.stock.toString(), withBorder: false),
+              keyValueItem('Nama Barang', widget.item.productName),
+              keyValueItem('Kategori', widget.item.categoryName),
+              keyValueItem('Kelompok', widget.item.group),
+              keyValueItem(
+                'Stok',
+                widget.item.stock.toString(),
+                withBorder: false,
+              ),
             ],
           ),
         ).b(12),
@@ -46,28 +72,65 @@ class ProductDetailView extends GetView<ProductsController>
             color: Color(0xFFF1F4F9),
             borderRadius: BorderRadius.circular(10),
           ),
-          child: Row(
-            children: [
-              Text(
-                'Harga',
-                style: TextStyle(fontWeight: FontWeight.w600),
-              ).expand,
-              Text(
-                moneyFormatter(item.price),
-                style: TextStyle(
-                  fontWeight: FontWeight.w600,
-                  color: Color(0xFF68778D),
+          child: Obx(
+            () => Column(
+              children: [
+                Row(
+                  children: [
+                    Text(
+                      'Harga',
+                      style: TextStyle(fontWeight: FontWeight.w600),
+                    ).expand,
+                    Text(
+                      moneyFormatter(widget.item.price),
+                      style: TextStyle(
+                        fontWeight: FontWeight.w600,
+                        color: Color(0xFF68778D),
+                      ),
+                    ),
+                  ],
                 ),
-              ),
-            ],
+                Row(
+                  children: [
+                    Text(
+                      'Diskon (20%)',
+                      style: TextStyle(fontWeight: FontWeight.w600),
+                    ).expand,
+                    Text(
+                      moneyFormatter(discountPrice),
+                      style: TextStyle(
+                        fontWeight: FontWeight.w600,
+                        color: Color(0xFF68778D),
+                      ),
+                    ),
+                  ],
+                ),
+                Row(
+                  children: [
+                    Text(
+                      'Total',
+                      style: TextStyle(fontWeight: FontWeight.w600),
+                    ).expand,
+                    Text(
+                      moneyFormatter(total),
+                      style: TextStyle(
+                        fontWeight: FontWeight.w600,
+                        color: Color(0xFF68778D),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
         ).b(16),
         Row(
           spacing: 12,
           children: [
             TextButton(
-              onPressed: () =>
-                  controller.deleteProducts([item.id], onSuccess: Get.back),
+              onPressed: () => controller.deleteProducts([
+                widget.item.id,
+              ], onSuccess: Get.back),
               style: TextButton.styleFrom(
                 overlayColor: Colors.red,
                 side: BorderSide(width: 1.2, color: Colors.red),
@@ -78,7 +141,7 @@ class ProductDetailView extends GetView<ProductsController>
               child: Text("Hapus Barang", style: TextStyle(color: Colors.red)),
             ).expand,
             ElevatedButton(
-              onPressed: () => controller.openForm(item: item),
+              onPressed: () => controller.openForm(item: widget.item),
               child: Text("Edit Barang"),
             ).expand,
           ],

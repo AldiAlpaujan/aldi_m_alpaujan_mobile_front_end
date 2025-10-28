@@ -18,7 +18,7 @@ class _InitializationPageState extends State<InitializationPage> {
     NotificationService.initNotification();
     CloudMessagingService.initializeMessaging();
 
-    Get.offAllNamed(Routes.products);
+    Get.offAllNamed(Routes.reimburs);
   }
 
   @override

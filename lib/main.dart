@@ -52,7 +52,7 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      title: "Aldi Technical Test",
+      title: "Application",
       getPages: AppPages.pages,
       initialRoute: AppPages.initial,
       debugShowCheckedModeBanner: false,

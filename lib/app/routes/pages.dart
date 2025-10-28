@@ -1,3 +1,4 @@
+import 'package:aldi_m_alpaujan_mobile_front_end/features/reimburs/presentation/pages/reimburs_list.page.dart';
 import 'package:get/get_core/get_core.dart';
 import 'package:get/get_instance/get_instance.dart';
 import 'package:get/get_navigation/src/routes/get_route.dart';
@@ -10,6 +11,8 @@ import 'package:aldi_m_alpaujan_mobile_front_end/features/products/presentation/
 import 'package:aldi_m_alpaujan_mobile_front_end/features/products/presentation/controllers/product_form.controller.dart';
 import 'package:aldi_m_alpaujan_mobile_front_end/features/products/presentation/pages/product_category.page.dart';
 import 'package:aldi_m_alpaujan_mobile_front_end/features/products/presentation/controllers/product_category.controller.dart';
+import 'package:aldi_m_alpaujan_mobile_front_end/features/reimburs/presentation/pages/reimburs.page.dart';
+import 'package:aldi_m_alpaujan_mobile_front_end/features/reimburs/presentation/controllers/reimburs.controller.dart';
 
 part 'routes.dart';
 
@@ -42,5 +45,11 @@ class AppPages {
         () => Get.lazyPut(() => ProductCategoryController()),
       ),
     ),
+    GetPage(
+      name: Routes.reimburs,
+      page: () => const ReimbursPage(),
+      binding: BindingsBuilder(() => Get.lazyPut(() => ReimbursController())),
+    ),
+    GetPage(name: Routes.reimbursList, page: () => const ReimbursListPage()),
   ];
 }
